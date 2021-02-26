@@ -6,6 +6,7 @@ export default createStore({
   mutations: {
   },
   actions: {
+    updateFormInput: () => null
   },
   modules: {
   }
