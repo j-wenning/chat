@@ -1,23 +1,18 @@
 <template>
 <label
   v-if='!!labelText && !!$attrs.id'
-  class='font-bold text-gray-900 dark:text-gray-100'
-  :for='`${$attrs.id}-${$.uid}`'>{{labelText}}</label>
+  class='form-input-label'
+  :for='$attrs.id || $.uid'>{{labelText}}</label>
 <input
   :='$attrs'
-  :id='`${$attrs.id}-${$.uid}`'
+  :id='$attrs.id || $.uid'
   @blur='blurred = true'
-  :class='[
-    !!error && blurred
-      ? "border-red-700 dark:border-red-400 border-2"
-      : "border border-gray-300 dark:border-gray-900",
-    "w-full px-3 py-2 dark:bg-gray-600 text-gray-900 dark:text-gray-100 rounded-sm",
-    "focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
-  ]'
+  :class='["w-full input", { "form-input-err": !!error && blurred }]'
   v-model='input' />
-<p
-  class='w-full text-red-700 dark:text-red-400 text-sm order-last'
-  v-if='!!error && typeof error === "string" && blurred'>{{error}}</p>
+<label
+  class='order-last form-input-label-err'
+  v-if='!!error && typeof error === "string" && blurred'
+  :for='$attrs.id || $.uid'>{{error}}</label>
 </template>
 
 <script>
@@ -53,9 +48,8 @@ import { mapActions } from 'vuex'
     ...mapActions(['updateFormInput']),
     async tryValidate () {
       const { input } = this
-      const error = this.error = await this.validate(input) || ''
+      this.value.error = this.error = await this.validate(input) || ''
       this.value.input = input
-      this.value.error = error
     }
   },
   mounted () {
@@ -76,5 +70,9 @@ export default class FormInput extends Vue {}
 </script>
 
 <style>
+.form-input-label { @apply font-bold text-gray-900 dark:text-gray-100; }
 
+.form-input-label-err { @apply text-red-700 dark:text-red-400 text-sm; }
+
+.form-input-err { @apply border-2 border-red-700 dark:border-red-400 !important; }
 </style>
