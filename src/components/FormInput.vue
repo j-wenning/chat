@@ -7,7 +7,7 @@
   :='$attrs'
   :id='$attrs.id || $.uid'
   @blur='blurred = true'
-  :class='["w-full input", { "form-input-err": !!error.message && blurred }]'
+  :class='[$attrs.class, "input", { "form-input-err": !!error.message && blurred }]'
   v-model='input' />
 <label
   class='order-last form-input-label-err'
