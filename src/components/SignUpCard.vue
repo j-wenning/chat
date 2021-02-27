@@ -33,7 +33,7 @@
         id='password'
         name='password'
         type='password'
-        autocomplete='current-password'
+        autocomplete='new-password'
         required />
       <label for='password' class='flex text-sm'>
         <svg class='h-5 w-5 text-blue-500 mr-1' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
@@ -50,7 +50,7 @@
         id='password-confirmation'
         name='password-confirmation'
         type='password'
-        autocomplete='current-password'
+        autocomplete='new-password'
         required />
     </div>
     <div>
