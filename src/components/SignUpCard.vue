@@ -88,6 +88,7 @@ import FormInput, { FormInputValue } from './FormInput.vue'
       } = this
       name = name.trim()
       email = email.trim()
+      document.activeElement.blur()
       try {
         const res = await fetch('/api/signup', {
           method: 'PUT',
