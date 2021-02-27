@@ -1,7 +1,7 @@
 <template>
 <label
   v-if='!!labelText && !!$attrs.id'
-  class='form-input-label'
+  class='font-bold'
   :for='$attrs.id || $.uid'>{{labelText}}</label>
 <input
   :='$attrs'
@@ -96,8 +96,6 @@ export default class FormInput extends Vue {}
 </script>
 
 <style>
-.form-input-label { @apply font-bold text-gray-900 dark:text-gray-100; }
-
 .form-input-label-err { @apply text-red-700 dark:text-red-400 text-sm; }
 
 .form-input-err { @apply border-2 border-red-700 dark:border-red-400 !important; }

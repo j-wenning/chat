@@ -1,7 +1,7 @@
 <template>
 <div class='max-w-md w-full space-y-8'>
   <!-- <img class='mx-auto h-12 w-auto' src='' alt=''> -->
-  <h2 class='mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100'>Sign in to your account</h2>
+  <h1 class='mt-6 text-center text-3xl font-extrabold'>Sign in to your account</h1>
   <form class='mt-8 space-y-5' @submit.prevent='onSubmit'>
     <div>
       <FormInput
@@ -34,7 +34,7 @@
       <router-link
         class='block w-full link text-right'
         to='/signup'>
-        <span class='text-gray-900 dark:text-gray-100'>New User?</span>
+        <span>New User?</span>
         Sign up!</router-link>
     </div>
   </form>
