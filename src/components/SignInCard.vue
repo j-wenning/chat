@@ -57,6 +57,7 @@ import FormInput, { FormInputValue } from './FormInput.vue'
   methods: {
     async onSubmit () {
       const { email: { input: email }, password: { input: password } } = this
+      document.activeElement.blur()
       try {
         const res = await fetch('/api/signin', {
           method: 'POST',
@@ -69,7 +70,7 @@ import FormInput, { FormInputValue } from './FormInput.vue'
             break
           case 401:
             this.email.error = { message: 'Invalid email or password.', forced: true }
-            this.password = FormInputValue()
+            this.password.error = { message: true }
             break
           default:
             this.email.error = { message: 'An unexpected error has occurred.', forced: true }
