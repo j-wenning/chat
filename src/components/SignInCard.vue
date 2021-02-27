@@ -7,6 +7,7 @@
       <FormInput
         :value='email'
         labelText='Email'
+        class='w-full'
         id='email-address'
         name='email'
         type='email'
@@ -17,6 +18,7 @@
       <FormInput
         :value='password'
         labelText='Password'
+        class='w-full'
         id='password'
         name='password'
         type='password'
