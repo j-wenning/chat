@@ -34,7 +34,7 @@
       <router-link
         class='block w-full link text-right'
         to='/signup'>
-        <span>New User?</span>
+        <span class='text-primary'>New User?</span>
         Sign up!</router-link>
     </div>
   </form>
