@@ -50,7 +50,7 @@ export const FormInputValue = (
     value: {
       type: Object,
       required: false,
-      default: FormInputValue()
+      default: FormInputValue
     }
   },
   data () {
@@ -73,19 +73,19 @@ export const FormInputValue = (
     })
     this.$watch(
       () => this.value.input,
-      () => { this.input = this.value.input }
+      newVal => { this.input = newVal }
     )
     this.$watch(
       () => this.value.error,
-      () => {
-        this.error = this.value.error
+      newVal => {
+        this.error = newVal
         if (this.error.forced) this.blurred = true
       }
     )
   },
   watch: {
-    async input () {
-      this.value.input = this.input = this.format(this.input) || ''
+    async input (newVal) {
+      this.value.input = this.input = this.format(newVal) || ''
       await this.tryValidate()
       this.updateFormInput()
     }
