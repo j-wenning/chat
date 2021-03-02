@@ -101,7 +101,7 @@ import FormInput, { FormInputValue } from './FormInput.vue'
       } catch (err) { console.error(err) }
     },
     formatName (input) {
-      return input.trimLeft().replace(/[^a-z.,'\s]|\s(\.|,|')/ig, '').replace(/(\.|,|')+|\s+/g, c => c[0]).substr(0, 32)
+      return input.trimLeft().replace(/\s{3,}/g, c => c.substr(0, 3).replace(/./g, ' ')).substr(0, 32)
     },
     validateName (input) { return { message: input.trim().length < 2 ? 'Name must be at least 2 characters long.' : false } },
     async validateEmail (input) {
