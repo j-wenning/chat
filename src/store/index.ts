@@ -6,7 +6,10 @@ export default createStore({
   mutations: {
   },
   actions: {
-    updateFormInput: () => null
+    updateFormInput: (): void => undefined,
+    toggleUsers: (): void => undefined
+  },
+  getters: {
   },
   modules: {
   }
