@@ -73,9 +73,9 @@ export default class App extends Vue {}
 
 .link { @apply text-green-500 hover:text-green-400; }
 
-::-webkit-scrollbar { @apply w-1 rounded-full; }
+::-webkit-scrollbar { @apply w-5 h-5 rounded-full; }
 
-::-webkit-scrollbar-thumb { @apply rounded-full bg-gray-400 dark:bg-gray-900; }
+::-webkit-scrollbar-thumb { @apply border-8 border-solid rounded-full border-transparent bg-clip-content bg-gray-400 dark:bg-gray-900; }
 
 ::-webkit-scrollbar-track-piece:start { @apply mt-2; }
 
@@ -88,10 +88,7 @@ export default class App extends Vue {}
 }
 
 @layer utilities {
-  .filter-blur {
-    filter: blur(5px);
-  }
-
+  .filter-blur { filter: blur(5px); }
 }
 
 </style>
