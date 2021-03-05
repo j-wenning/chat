@@ -9,6 +9,13 @@ interface User {
 
 interface State {
   users: User[];
+  isUsersToggled: boolean;
+  isSettingsToggled: boolean;
+}
+
+enum Mutations {
+  toggleUsers = 'toggleUsers',
+  toggleSettings = 'toggleSettings'
 }
 
 const fakeString = (minLength: number, maxLength: number): string =>
@@ -18,16 +25,23 @@ const fakeUsers = [...Array(35)].map((_, id) => ({ id, avatar: '', name: fakeStr
 
 export default createStore({
   state: {
-    users: fakeUsers
+    users: fakeUsers,
+    isUsersToggled: false,
+    isSettingsToggled: false
   },
   mutations: {
+    toggleUsers: (state: State): void => { state.isUsersToggled = !state.isUsersToggled },
+    toggleSettings: (state: State): void => { state.isSettingsToggled = !state.isSettingsToggled }
   },
   actions: {
     updateFormInput: (): void => undefined,
-    toggleUsers: (): void => undefined
+    toggleUsers: ({ commit }): void => commit(Mutations.toggleUsers),
+    toggleSettings: ({ commit }): void => commit(Mutations.toggleSettings)
   },
   getters: {
-    users: (state: State): Array<User> => state.users
+    users: (state: State): Array<User> => state.users,
+    isUsersToggled: (state: State): boolean => state.isUsersToggled,
+    isSettingsToggled: (state: State): boolean => state.isSettingsToggled
   },
   modules: {
   }
