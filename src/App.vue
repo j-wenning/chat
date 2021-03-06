@@ -1,7 +1,7 @@
 <template>
-<button @click='toggleDarkMode' role='switch' :aria-checked='dark' class='fixed p-3 m-2 right-0 z-50'>
+<button @click='toggleDark' role='switch' :aria-checked='isDarkToggled' class='fixed p-3 m-2 right-0 z-50'>
   <span class='sr-only'>Toggle dark mode</span>
-  <svg v-if='dark' class='h-7 w-7 text-gray-100' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg v-if='isDarkToggled' class='h-7 w-7 text-gray-100' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
   <svg v-else class='h-7 w-7 text-gray-900' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
@@ -13,14 +13,32 @@
 
 <script>
 import { Options, Vue } from 'vue-class-component'
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from '@/../tailwind.config.js'
 
 const htmlClasses = document.querySelector('html')?.classList
+let { theme: { screens: { md: mdBreakpoint } } } = resolveConfig(tailwindConfig)
+mdBreakpoint = parseInt(mdBreakpoint)
 
 @Options({
-  data () { return { dark: false } },
-  methods: { toggleDarkMode () { this.dark = !this.dark } },
-  mounted () { this.dark = htmlClasses.contains('dark') },
-  watch: { dark () { htmlClasses.toggle('dark') } }
+  data () { return { isDarkToggled: false } },
+  methods: {
+    toggleDark () {
+      this.isDarkToggled = !this.isDarkToggled
+      if (this.isDarkToggled) htmlClasses.add('dark')
+      else htmlClasses.remove('dark')
+    },
+    handleWindowResize (e) {
+      const isMdBreakpoint = e.currentTarget.innerWidth >= mdBreakpoint
+      this.$store.dispatch('setMedium', isMdBreakpoint)
+    }
+  },
+  mounted () {
+    this.isDarkToggled = htmlClasses.contains('dark')
+    window.addEventListener('resize', this.handleWindowResize)
+    window.dispatchEvent(new Event('resize'))
+  },
+  beforeUnmount () { window.removeEventListener('resize', this.handleWindowResize) }
 })
 
 export default class App extends Vue {}
@@ -70,6 +88,8 @@ export default class App extends Vue {}
     focus:outline-none focus:ring-green-500 focus:border-green-500
     focus:z-10;
 }
+
+.hr { @apply border-t-2 border-gray-400 dark:border-gray-900; }
 
 .link { @apply text-green-500 hover:text-green-400; }
 
