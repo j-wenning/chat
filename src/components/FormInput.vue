@@ -1,18 +1,27 @@
 <template>
 <label
-  v-if='!!labelText && !!$attrs.id'
+  v-if='!!labelText'
   class='font-bold'
-  :for='$attrs.id || $.uid'>{{labelText}}</label>
+  :for='id'>{{labelText}}</label>
 <input
+  v-if='$attrs.type === "file"'
+  ref='input'
   :='$attrs'
-  :id='$attrs.id || $.uid'
-  @blur='blurred = true'
+  :id='id'
   :class='["w-full input", { "form-input-err": !!error.message && blurred }]'
-  v-model='input' />
+  @blur='blurred = true'
+  @change='handleChange' />
+<input
+  v-else
+  :='$attrs'
+  :id='id'
+  :class='["w-full input", { "form-input-err": !!error.message && blurred }]'
+  @blur='blurred = true'
+  v-model='value.input' />
 <label
   class='order-last form-input-label-err'
   v-if='!!error.message && typeof error.message === "string" && blurred'
-  :for='$attrs.id || $.uid'>{{error.message}}</label>
+  :for='id'>{{error.message}}</label>
 </template>
 
 <script>
@@ -53,19 +62,20 @@ export const FormInputValue = (
       default: FormInputValue
     }
   },
-  data () {
-    return {
-      ...this.value,
-      blurred: false
-    }
-  },
+  data () { return { blurred: false } },
   methods: {
     ...mapActions(['updateFormInput']),
     async tryValidate () {
       const { input, value: { error: { forced } } } = this
       const { message } = await this.validate(input)
-      if (!forced || !!message) this.value.error = this.error = { message, forced: false }
-    }
+      if (!forced || !!message) this.value.error = { message, forced: false }
+    },
+    handleChange (e) { this.value.input = { ...e.currentTarget.files } }
+  },
+  computed: {
+    id () { return this.$attrs.id || this.$.uid },
+    input () { return this.value.input },
+    error () { return this.value.error }
   },
   mounted () {
     this.$store.subscribeAction(action => {
@@ -73,22 +83,21 @@ export const FormInputValue = (
     })
     this.$watch(
       () => this.value.input,
-      newVal => { this.input = newVal }
+      this.$attrs.type === 'file'
+        ? async () => {
+          this.$refs.input.value = ''
+          this.updateFormInput()
+        }
+        : async newVal => {
+          this.value.input = this.format(newVal) || ''
+          await this.tryValidate()
+          this.updateFormInput()
+        }
     )
     this.$watch(
       () => this.value.error,
-      newVal => {
-        this.error = newVal
-        if (this.error.forced) this.blurred = true
-      }
+      newVal => { if (newVal.forced) this.blurred = true }
     )
-  },
-  watch: {
-    async input (newVal) {
-      this.value.input = this.input = this.format(newVal) || ''
-      await this.tryValidate()
-      this.updateFormInput()
-    }
   }
 })
 
