@@ -62,7 +62,7 @@ export default class App extends Vue {}
 .button-select {
   @apply focus:outline-none
     border border-transparent
-    focus:ring-2 focus:ring-offset-2 focus:ring-green-400
+    focus:ring-2 focus:ring-offset-2 focus:ring-green-500
     button-disabled;
 }
 
@@ -70,12 +70,15 @@ export default class App extends Vue {}
   @apply
     text-sm font-medium
     text-white
-    bg-green-500 hover:bg-green-600 disabled:bg-green-500
+    bg-green-600 hover:bg-green-700 disabled:bg-green-600
     button-select;
 }
 
-.button {
-  @apply py-2 px-4 rounded-md button-basic;
+.button { @apply py-2 px-4 rounded-md button-basic; }
+
+.button-secondary {
+  @apply focus:ring-purple-500 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-600 !important;
+  @apply button;
 }
 
 .input {
