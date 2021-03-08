@@ -5,10 +5,12 @@ interface User {
   id: number;
   avatar: string;
   name: string;
+  email?: string;
 }
 
 interface State {
   users: User[];
+  user: User;
   isMediumToggled: boolean;
   isUsersToggled: boolean;
   isSettingsToggled: boolean;
@@ -23,11 +25,16 @@ enum Mutations {
 const fakeString = (minLength: number, maxLength: number): string =>
   [...Array(randInt(minLength, maxLength))].map(() => String.fromCharCode(randInt(32, 126))).join('')
 
-const fakeUsers = [...Array(35)].map((_, id) => ({ id, avatar: '', name: fakeString(2, 36) }))
+const fakeUserCount = 35
+
+const fakeUsers = [...Array(fakeUserCount)].map((_, id) => ({ id, avatar: '', name: fakeString(2, 36) }))
+
+const fakeUser = { ...fakeUsers[randInt(1, fakeUserCount)], email: 'fake.email@test.co' }
 
 export default createStore({
   state: {
     users: fakeUsers,
+    user: fakeUser,
     isMediumToggled: false,
     isUsersToggled: false,
     isSettingsToggled: false
@@ -45,6 +52,7 @@ export default createStore({
   },
   getters: {
     users: (state: State): Array<User> => state.users,
+    user: (state: State): User => state.user,
     isMediumToggled: (state: State): boolean => state.isMediumToggled,
     isUsersToggled: (state: State): boolean => state.isUsersToggled,
     isSettingsToggled: (state: State): boolean => state.isSettingsToggled
