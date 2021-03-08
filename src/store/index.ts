@@ -17,6 +17,7 @@ interface State {
 }
 
 enum Mutations {
+  updateUser = 'updateUser',
   setMedium = 'setMedium',
   toggleUsers = 'toggleUsers',
   toggleSettings = 'toggleSettings'
@@ -29,7 +30,7 @@ const fakeUserCount = 35
 
 const fakeUsers = [...Array(fakeUserCount)].map((_, id) => ({ id, avatar: '', name: fakeString(2, 36) }))
 
-const fakeUser = { ...fakeUsers[randInt(1, fakeUserCount)], email: 'fake.email@test.co' }
+const fakeUser = Object.assign(fakeUsers[randInt(1, fakeUserCount)], { email: 'fake.email@test.co' })
 
 export default createStore({
   state: {
@@ -40,6 +41,9 @@ export default createStore({
     isSettingsToggled: false
   },
   mutations: {
+    updateUser: (state: State, payload: User): void => {
+      Object.assign(state.user, Object.fromEntries(Object.entries(payload).filter(([_, val]) => val !== null)))
+    },
     setMedium: (state: State, payload: boolean): void => { state.isMediumToggled = payload },
     toggleUsers: (state: State): void => { state.isUsersToggled = !state.isUsersToggled },
     toggleSettings: (state: State): void => { state.isSettingsToggled = !state.isSettingsToggled }
