@@ -185,13 +185,13 @@ import InfoLabel from './InfoLabel.vue'
           break
         case 400: {
           const { message } = await res.json()
-          if (/password/gi.test(message)) this.password.error = { message: 'Invalid password.', forced: true }
+          if (/password/gi.test(message)) this.password.error = { message: 'Invalid password.  Passwords must be between 8 and 32 characters.', forced: true }
           if (/email/gi.test(message)) this.email.error = { message: 'Email is taken or invalid.', forced: true }
           this.passwordVerification.error = { message: true }
           break
         }
         case 401:
-          this.passwordVerification.error = { message: 'Invalid password.  Passwords must be between 8 and 32 characters.', forced: true }
+          this.passwordVerification.error = { message: 'Invalid password.', forced: true }
           break
         default:
           this.passwordVerification.error = { message: 'An unexpected error has occurred.', forced: true }
