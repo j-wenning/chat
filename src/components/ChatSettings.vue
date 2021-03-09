@@ -64,7 +64,7 @@
         name='password'
         type='password'
         autocomplete='new-password' />
-      <div>
+      <div class='flex flex-col'>
         <FormInput
           :value='passwordVerification'
           labelText='Current password'
@@ -72,7 +72,10 @@
           name='passwordVerification'
           type='password'
           autocomplete='current-password' />
-        <InfoLabel for='passwordVerification' labelText='Required to change email/password.' />
+        <InfoLabel
+          for='passwordVerification'
+          labelText='Required to change email/password.'
+          class='my-1' />
       </div>
       <div>
         <button
