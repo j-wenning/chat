@@ -8,7 +8,7 @@
       <h1 class='text-2xl font-extrabold'>Settings</h1>
     </div>
     <hr class='hr -mx-3'>
-    <form @submit.prevent='handleSubmit' class='space-y-3 ml-1 -mr-4 max-h-full overflow-y-scroll'>
+    <form @submit.prevent='handleSubmit' class='space-y-3 p-1 -mr-5 max-h-full overflow-y-scroll'>
       <div class='flex justify-center items-center'>
         <div class='mr-3 relative flex justify-center text-center'>
           <FormInput
