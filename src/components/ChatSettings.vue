@@ -191,7 +191,7 @@ import InfoLabel from './InfoLabel.vue'
           break
         }
         case 401:
-          this.passwordVerification.error = { message: 'Invalid password.', forced: true }
+          this.passwordVerification.error = { message: 'Invalid password.  Passwords must be between 8 and 32 characters.', forced: true }
           break
         default:
           this.passwordVerification.error = { message: 'An unexpected error has occurred.', forced: true }
