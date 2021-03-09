@@ -3,12 +3,12 @@
   @click.self='handleClose'
   v-if='isSettingsToggled'
   class='sm:py-12 sm:px-6 lg:px-8 absolute inset-0 flex justify-center items-center bg-gray-900 bg-opacity-50'>
-  <div class='space-y-3 p-3 max-h-full w-full max-w-md overflow-y-scroll border-2 border-gray-400 dark:border-gray-900 bg-gray-50 dark:bg-gray-700'>
+  <div class='space-y-3 p-3 h-full sm:h-unset max-h-full w-full max-w-md flex flex-col border-2 border-gray-400 dark:border-gray-900 bg-gray-50 dark:bg-gray-700'>
     <div>
       <h1 class='text-2xl font-extrabold'>Settings</h1>
     </div>
     <hr class='hr -mx-3'>
-    <form @submit.prevent='handleSubmit' class='space-y-3'>
+    <form @submit.prevent='handleSubmit' class='space-y-3 ml-1 -mr-4 max-h-full overflow-y-scroll'>
       <div class='flex justify-center items-center'>
         <div class='mr-3 relative flex justify-center text-center'>
           <FormInput
