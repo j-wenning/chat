@@ -21,7 +21,7 @@ let { theme: { screens: { md: mdBreakpoint } } } = resolveConfig(tailwindConfig)
 mdBreakpoint = parseInt(mdBreakpoint)
 
 @Options({
-  data () { return { isDarkToggled: false } },
+  data () { return { isDarkToggled: false, isMdBreakpoint: false } },
   methods: {
     toggleDark () {
       this.isDarkToggled = !this.isDarkToggled
@@ -30,7 +30,10 @@ mdBreakpoint = parseInt(mdBreakpoint)
     },
     handleWindowResize (e) {
       const isMdBreakpoint = e.currentTarget.innerWidth >= mdBreakpoint
-      this.$store.dispatch('setMedium', isMdBreakpoint)
+      if (isMdBreakpoint !== this.isMdBreakpoint) {
+        this.$store.dispatch('setMedium', isMdBreakpoint)
+        this.isMdBreakpoint = isMdBreakpoint
+      }
     }
   },
   mounted () {
