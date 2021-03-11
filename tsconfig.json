@@ -31,6 +31,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "server/**/*.ts",
+    "server/**/*.tsx",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
