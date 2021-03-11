@@ -9,6 +9,6 @@ const fireHandlers = (): void => {
   process.exit()
 }
 
-['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException'].forEach(event => { process.on(event, fireHandlers) })
+['exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2', 'uncaughtException'].forEach((event: string): void => { process.on(event, fireHandlers) })
 
 module.exports = (handler: () => void): void => { handlers.push(handler) }
