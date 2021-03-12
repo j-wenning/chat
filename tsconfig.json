@@ -14,7 +14,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
+        "src/*",
+        "shared/*"
+      ],
+      "$/*": [
+        "server/*",
+        "shared/*"
       ]
     },
     "lib": [
@@ -30,6 +35,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx",
+    "shared/**/*.ts",
     "server/**/*.ts"
   ],
   "exclude": [
