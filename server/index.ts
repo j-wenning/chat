@@ -1,14 +1,19 @@
+import 'dotenv/config'
+import express from 'express'
+import { cursorTo } from 'readline'
+import parseEnv from './parse-env'
+import exitHandler from './exit-handler'
+import getDB from './db'
+import session from './session'
+
 (async () => {
-  require('dotenv/config')
-  const env = require('./parse-env')(process.env)
+  const env = parseEnv(process.env)
   const { PORT: port } = env
-  const exitHandler = require('./exit-handler')
-  const app = require('express')()
-  const db = await require('./db')(env).catch((err: any): void => { console.error(err) })
-  const { cursorTo } = require('readline')
+  const app = express()
+  const db = await getDB(env).catch((err: any) => console.error(err))
   const { stdout } = process
 
-  app.use(require('./session')(env))
+  app.use(session(env))
 
   app.use((_: any, res: any): void => { res.send('Hello (:') })
 

@@ -1,10 +1,11 @@
-const { MongoClient: { connect: mongoConnect } } = require('mongodb')
-const { cursorTo } = require('readline')
-const exitHandler = require('./exit-handler')
+import { MongoClient } from 'mongodb'
+import { cursorTo } from 'readline'
+import exitHandler from './exit-handler'
+const { connect: mongoConnect } = MongoClient
 const { stdout } = process
 const mongoOptions = { useUnifiedTopology: true }
 
-module.exports = async (env: any): Promise<any> => {
+export default async (env: any): Promise<any> => {
   const { DB_URL: dbURL } = env
   const client = await mongoConnect(dbURL, mongoOptions).catch((err: any) => { throw err })
   exitHandler(() => {

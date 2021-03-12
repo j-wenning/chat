@@ -1,7 +1,7 @@
-const session = require('express-session')
-const sessionStore = require('connect-mongo').default
+import session from 'express-session'
+import MongoStore from 'connect-mongo'
 
-module.exports = (env: any): any => {
+export default (env: any): any => {
   const {
     SESSION_SECRET: sessionSecret,
     SESSION_EXPIRY: sessionExpiry,
@@ -11,7 +11,7 @@ module.exports = (env: any): any => {
     resave: true,
     saveUninitialized: false,
     secret: sessionSecret,
-    store: sessionStore.create({ mongoUrl: dbURL, collectionName: 'sessions' }),
+    store: MongoStore.create({ mongoUrl: dbURL, collectionName: 'sessions' }),
     cookie: { maxAge: sessionExpiry, sameSite: true }
   })
 }
