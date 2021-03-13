@@ -3,6 +3,7 @@ import './mongo'
 import { cursorTo } from 'readline'
 import express from 'express'
 import session from './session'
+import getPubkey from './get-pubkey'
 import errorHandler from './error-handler'
 import exitHandler from './exit-handler'
 
@@ -13,6 +14,8 @@ const { stdout } = process
 app.use(express.json())
 
 app.use(session)
+
+app.get('/pubkey', getPubkey)
 
 app.use(errorHandler)
 
