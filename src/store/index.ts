@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { randInt } from '@/scripts/random.ts'
+import { randInt } from '#/scripts/random'
 
 interface User {
   id: number;
@@ -42,7 +42,7 @@ export default createStore({
   },
   mutations: {
     updateUser: (state: State, payload: User): void => {
-      Object.assign(state.user, Object.fromEntries(Object.entries(payload).filter(([_, val]) => val !== null)))
+      Object.assign(state.user, Object.fromEntries(Object.entries(payload).filter(([, val]) => val !== null)))
     },
     setMedium: (state: State, payload: boolean): void => { state.isMediumToggled = payload },
     toggleUsers: (state: State): void => { state.isUsersToggled = !state.isUsersToggled },
