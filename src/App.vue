@@ -14,7 +14,7 @@
 <script>
 import { Options, Vue } from 'vue-class-component'
 import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from '@/../tailwind.config.js'
+import tailwindConfig from '~/tailwind.config.js'
 
 const htmlClasses = document.querySelector('html')?.classList
 let { theme: { screens: { md: mdBreakpoint } } } = resolveConfig(tailwindConfig)
