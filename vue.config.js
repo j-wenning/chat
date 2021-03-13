@@ -1,8 +1,23 @@
+require('dotenv/config')
+const { resolve } = require('path')
+const { PORT } = process.env
 module.exports = {
-  configureWebpack: config =>
-    process.env.NODE_ENV === 'production'
-      ? {}
-      : {
-        devServer: { watchOptions: { aggregateTimeout: 200, poll: 1000 } }
+    configureWebpack: {
+      resolve: {
+        alias: {
+          '#': resolve('shared'),
+          '~': __dirname,
+        }
+      },
+      devServer: {
+        proxy: {
+          '^/api': {
+            target: 'http://localhost:' + PORT,
+            pathRewrite: { '^/api': '' },
+            secure: false
+          }
+        },
+        watchOptions: { aggregateTimeout: 200, poll: 1000 }
       }
-}
+    }
+  }
