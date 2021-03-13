@@ -13,14 +13,9 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*",
-        "shared/*"
-      ],
-      "$/*": [
-        "server/*",
-        "shared/*"
-      ]
+      "@/*": [ "src/*", ],
+      "#/*": [ "shared/*" ],
+      "~/*": [ "./*" ]
     },
     "lib": [
       "esnext",
@@ -38,7 +33,5 @@
     "shared/**/*.ts",
     "server/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": [ "node_modules" ]
 }
