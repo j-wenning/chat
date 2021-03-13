@@ -1,11 +1,11 @@
 import crypto from 'crypto'
 
 interface HashSet {
-  salt: string
-  hash: string
+  salt: string;
+  hash: string;
 }
 
-export const genSalt = (rounds: number = 12): string => {
+export const genSalt = (rounds = 12): string => {
   rounds = Math.min(rounds, 15)
   return crypto.randomBytes(Math.ceil(rounds / 2)).toString('hex').slice(0, rounds)
 }
